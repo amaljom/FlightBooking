@@ -29,7 +29,6 @@ public class Booking {
     @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalDateTime departureTime;
 
-
     @Column
     private String departureAirport;
 
