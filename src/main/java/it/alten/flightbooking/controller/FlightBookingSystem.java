@@ -18,12 +18,12 @@ public interface FlightBookingSystem {
     @GetMapping("/all")
     ResponseEntity<List<Booking>> findAll();
 
-    @GetMapping()
+    @GetMapping("/all/{passengerName}")
     ResponseEntity<List<Booking>> findAllByPassenger(@PathVariable(value="passengerName")String passengerName);
 
     @DeleteMapping("/delete/{id}")
-    boolean delete(@PathVariable(value = "id") Long id);
+    ResponseEntity<List<Booking>>  delete(@PathVariable(value = "id") Long id);
 
-    @GetMapping()
-    int getAvailableSeats(String flightNumber);
+//    @GetMapping()
+//    int getAvailableSeats(String flightNumber);
 }

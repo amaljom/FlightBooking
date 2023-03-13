@@ -3,6 +3,7 @@ package it.alten.flightbooking.controller;
 import it.alten.flightbooking.model.Booking;
 import it.alten.flightbooking.model.dto.BookingDto;
 import it.alten.flightbooking.model.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/bookings")
 public class FlightBookingSystemImpl implements FlightBookingSystem{
 
+    @Autowired
     private BookingService service;
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,15 +42,16 @@ public class FlightBookingSystemImpl implements FlightBookingSystem{
     }
 
     @Override
-    public boolean delete(Long id) {
-
-        return service.cancelBooking(id);
+    public ResponseEntity<List<Booking>> delete(Long id) {
+        service.cancelBooking(id);
+        List<Booking> users = service.getFlightBookings();
+        return new ResponseEntity<>(users, HttpStatus.FOUND);
     }
 
-    @Override
-    public int getAvailableSeats(String flightNumber) {
-        // metodo deve trovare flight tramide id e la relazione e restituire il numero di posti
-        return 0;
-    }
+//    @Override
+//    public int getAvailableSeats(String flightNumber) {
+//        // metodo deve trovare flight tramide id e la relazione e restituire il numero di posti
+//        return 0;
+//    }
 
 }
